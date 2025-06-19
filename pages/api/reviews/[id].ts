@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getUserFromRequest } from '../../../../lib/auth';
-import { prisma } from '../../../../lib/prisma';
+import { getUserFromRequest } from '../../../lib/auth';
+import { prisma } from '../../../lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const user = getUserFromRequest(req);
@@ -13,15 +13,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       where: { id: Number(id) },
     });
 
-    if (!review || review.userId !== (user as any).userId)
-      return res.status(403).json({ error: 'No autorizado para eliminar esta reseña' });
+    if (!review)
+      return res.status(404).json({ error: 'La reseña no existe' });
+
+    if (review.userId !== (user as any).userId)
+      return res.status(403).json({ error: 'No tienes permiso para eliminar esta reseña' });
 
     await prisma.review.delete({
       where: { id: Number(id) },
     });
 
-    res.status(200).json({ message: 'Reseña eliminada' });
+    res.status(200).json({ message: 'Reseña eliminada correctamente' });
   } else {
-    res.status(405).end();
+    res.status(405).end(); // Método no permitido
   }
 }

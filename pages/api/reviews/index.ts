@@ -8,16 +8,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'GET') {
     const reviews = await prisma.review.findMany({
-      include: {
-        user: {
-          select: { name: true },
-        },
-      },
+      include: { user: { select: { name: true } } },
       orderBy: { createdAt: 'desc' },
     });
-
-    res.status(200).json(reviews);
-  } else {
-    res.status(405).end();
+    return res.status(200).json(reviews);
   }
+
+  if (req.method === 'POST') {
+    const { bookTitle, rating, review, mood } = req.body;
+
+    if (!bookTitle || !rating || !review || !mood)
+      return res.status(400).json({ error: 'Faltan datos' });
+
+    const newReview = await prisma.review.create({
+      data: {
+        bookTitle,
+        rating: parseInt(rating),
+        review,
+        mood,
+        userId: (user as any).userId,
+      },
+    });
+
+    return res.status(201).json(newReview);
+  }
+
+  res.status(405).end(); // Método no permitido
 }

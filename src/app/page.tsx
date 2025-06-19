@@ -1,10 +1,6 @@
-
-import styles from "./page.module.css";
+// src/app/page.tsx
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      elias puma claure
-    </div>
-  );
+  redirect('/login');
 }
