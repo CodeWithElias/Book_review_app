@@ -1,6 +1,6 @@
 
 import bcrypt from 'bcryptjs';
-import { prisma } from '../../lib/prisma';
+import { prisma } from '../../../lib/prisma';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();

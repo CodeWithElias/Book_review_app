@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getUserFromRequest } from '../../../lib/auth';
-import { prisma } from '../../../lib/prisma';
+import { getUserFromRequest } from '../../../../lib/auth';
+import { prisma } from '../../../../lib/prisma';
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const user = getUserFromRequest(req);
