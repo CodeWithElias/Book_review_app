@@ -28,6 +28,7 @@ export default function LoginPage() {
     if (!res.ok) {
       setError(data.error || 'Error al iniciar sesión');
     } else {
+      localStorage.setItem('userName', data.name)
       router.push('/reviews');
     }
   };

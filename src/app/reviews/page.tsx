@@ -1,4 +1,5 @@
 'use client'
+import { getUserFromRequest } from "../../../lib/auth";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
@@ -14,6 +15,7 @@ type Review ={
 };
 
 export default function ReviewsPage(){
+  const [userName, setUserName] = useState("");
   const [reviews, setReviews] = useState<Review[]>([]);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -86,8 +88,15 @@ export default function ReviewsPage(){
     }
   };
 
-  useEffect(() =>{
-    fetchReviews();  
+  useEffect(() => {
+    
+  },[userName])
+
+  useEffect(() =>{  
+    const nombre = localStorage.getItem('userName');
+    if (nombre) setUserName(nombre)
+
+      fetchReviews();
   },[]);
 
 
@@ -147,14 +156,18 @@ export default function ReviewsPage(){
       
       <div className="lista-reseñas">
         {reviews.map((r) => (
-          <div key={r.id} >
+          <div key={r.id}>
             <h2>{r.bookTitle}</h2>
             <p>{r.user.name}</p>
             <p className="comentario">{r.review}</p>
-            <p><strong>{r.rating}/5</strong>
+            <p>
+              <strong>{r.rating}/5</strong>
             </p>
             <p>{r.mood}</p>
-            <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
+
+            {userName === r.user.name && (
+              <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
+            )}
           </div>
         ))}
       </div>
