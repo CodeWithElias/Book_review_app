@@ -33,7 +33,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div >
+    <div className='registrarse' >
       <form onSubmit={handleSubmit} className='formulario' >
         <h1 >Crear Cuenta</h1>
 

@@ -16,6 +16,7 @@ type Review ={
 export default function ReviewsPage(){
   const [reviews, setReviews] = useState<Review[]>([]);
   const [error, setError] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const [form, setForm] = useState({
     bookTitle: '',
     rating: '',
@@ -94,57 +95,65 @@ export default function ReviewsPage(){
     <div className="reseñas">
       <h1>Reseñas de Libros</h1>
 
-      <form onSubmit={handleSubmit} className="reseñas-formulario">
-        <h2>Agregar reseñas</h2>
-        <input 
-        name="bookTitle"
-        value={form.bookTitle}
-        onChange={handleChange}
-        placeholder="Titulo del libro"
-        required
-        />
-        <input
-          name="rating"
-          type="number"
-          min="1"
-          max="5"
-          value={form.rating}
-          onChange={handleChange}
-          placeholder="Puntuación (1-5)"
-          required
-        />
-        <textarea
-          name="review"
-          value={form.review}
-          onChange={handleChange}
-          placeholder="Tu opinión"
-          rows={3}
-          required
-        />
-        <input
-          name="mood"
-          value={form.mood}
-          onChange={handleChange}
-          placeholder="¿Cómo te sentiste al leer?"
-          required
-        />
-        <button
-          type="submit"
-        >
-          Publicar Reseña
-        </button>
-      </form>
+      <button onClick={() => setShowModal(true)}>Agregar Reseña</button>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Agregar reseña</h2>
+            <form onSubmit={handleSubmit} className="reseñas-formulario">
+              <input
+                name="bookTitle"
+                value={form.bookTitle}
+                onChange={handleChange}
+                placeholder="Titulo del libro"
+                required
+              />
+              <input
+                name="rating"
+                type="number"
+                min="1"
+                max="5"
+                value={form.rating}
+                onChange={handleChange}
+                placeholder="Puntuación (1-5)"
+                required
+              />
+              <textarea
+                name="review"
+                value={form.review}
+                onChange={handleChange}
+                placeholder="Tu opinión"
+                rows={3}
+                required
+              />
+              <input
+                name="mood"
+                value={form.mood}
+                onChange={handleChange}
+                placeholder="¿Cómo te sentiste al leer?"
+                required
+              />
+              <div className="modal-actions">
+                <button type="submit">Publicar Reseña</button>
+                <button type="button" onClick={() => setShowModal(false)}>Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Lista de reseñas */}
       
       <div className="lista-reseñas">
         {reviews.map((r) => (
-          <div key={r.id} style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '8px' }}>
+          <div key={r.id} >
             <h2>{r.bookTitle}</h2>
-            <p>Por: {r.user.name}</p>
-            <p>
-              Valoración: <strong>{r.rating}/5</strong> | Mood: <em>{r.mood}</em>
+            <p>{r.user.name}</p>
+            <p className="comentario">{r.review}</p>
+            <p><strong>{r.rating}/5</strong>
             </p>
+            <p>{r.mood}</p>
             <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
           </div>
         ))}

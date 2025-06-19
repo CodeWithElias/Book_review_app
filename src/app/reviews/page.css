@@ -8,25 +8,96 @@
 .reseñas h1{
     margin: 50px;
 }
+.reseñas button{
+    font-size: 20px;
+    background-color: #ccc;
+    color: #000000;
+    padding: 5px;
+}
 
-.reseñas-formulario{
-    background-color: rgb(2, 51, 51);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+.modal-overlay {
     position: fixed;
-    bottom: 3%;
-    width: 100%;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(31, 30, 30, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+z-index: 999;
 }
-.reseñas-formulario h2{
-    margin: 20px;
+
+.modal-content {
+    background: rgb(46, 45, 45);
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
-.reseñas-formulario input{
-    margin: 10px;
-    height: 30px;
+
+.reseñas-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reseñas-formulario input,
+.reseñas-formulario textarea {
+    margin: 15px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
 }
 
 
 .lista-reseñas{
-    display: 'grid';
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.lista-reseñas div{
+    margin: 10px;
+    border: solid 2px #ccc;
+    padding: 16px;
+    border-radius: 8px;
+}
+.lista-reseñas div h2, p ,button{
+    margin: 8px;
+}
+.lista-reseñas div:hover{
+    background-color: rgb(46, 46, 51);
+}
+.lista-reseñas button{
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 5px;
+    color:#000000;
+    background-color: rgb(255, 255, 255);
+}
+.comentario{
+    background-color: #2c2b2b;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .lista-reseñas{
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
 }
