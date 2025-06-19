@@ -1,8 +1,7 @@
-
-import bcrypt from 'bcryptjs';
-import { serialize } from 'cookie';
-import { generateToken } from '../../../lib/jwt';
-import { prisma } from '../../../lib/prisma';
+import bcrypt from "bcryptjs";
+import { generateToken } from "../../../lib/jwt";
+import { prisma } from "../../../lib/prisma";
+import { serialize } from "cookie";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
