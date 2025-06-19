@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
+import './page.css'
 
 type Review ={
   id: number;
@@ -44,7 +45,7 @@ export default function ReviewsPage(){
 
 
   const handleDelete = async (id: number) => {
-    const res = await fetch('/api/reviews/${id}', {
+    const res = await fetch(`/api/reviews/${id}`, {
       method: 'DELETE',
       credentials: 'include',
     });
@@ -90,12 +91,11 @@ export default function ReviewsPage(){
 
 
   return (
-    <div>
+    <div className="reseñas">
       <h1>Reseñas de Libros</h1>
 
-      [/* Formulario */]
-      <form onSubmit={handleSubmit}>
-        <h2>Agregar nueva reseña</h2>
+      <form onSubmit={handleSubmit} className="reseñas-formulario">
+        <h2>Agregar reseñas</h2>
         <input 
         name="bookTitle"
         value={form.bookTitle}
@@ -111,7 +111,6 @@ export default function ReviewsPage(){
           value={form.rating}
           onChange={handleChange}
           placeholder="Puntuación (1-5)"
-          className="w-full p-2 border rounded"
           required
         />
         <textarea
@@ -119,7 +118,6 @@ export default function ReviewsPage(){
           value={form.review}
           onChange={handleChange}
           placeholder="Tu opinión"
-          className="w-full p-2 border rounded"
           rows={3}
           required
         />
@@ -128,7 +126,6 @@ export default function ReviewsPage(){
           value={form.mood}
           onChange={handleChange}
           placeholder="¿Cómo te sentiste al leer?"
-          className="w-full p-2 border rounded"
           required
         />
         <button
@@ -139,18 +136,19 @@ export default function ReviewsPage(){
       </form>
 
       {/* Lista de reseñas */}
-      {reviews.map((r) =>(
-        <div key={r.id}>
-          <h2>{r.bookTitle}</h2>
-          <p>Por: {r.user.name}</p>
-          <p>Valoracion: <strong>{r.rating}/5</strong> | Mood: <em>{r.mood}</em></p>
-          <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
-        </div>
-      ))}
-
-      {ReviewsPage.length == 0 && !error && (
-        <p>No hay reseñas aún.</p>
-      )}
+      
+      <div className="lista-reseñas">
+        {reviews.map((r) => (
+          <div key={r.id} style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '8px' }}>
+            <h2>{r.bookTitle}</h2>
+            <p>Por: {r.user.name}</p>
+            <p>
+              Valoración: <strong>{r.rating}/5</strong> | Mood: <em>{r.mood}</em>
+            </p>
+            <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

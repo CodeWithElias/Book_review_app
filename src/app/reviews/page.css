@@ -1,0 +1,32 @@
+.reseñas{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.reseñas h1{
+    margin: 50px;
+}
+
+.reseñas-formulario{
+    background-color: rgb(2, 51, 51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 3%;
+    width: 100%;
+}
+.reseñas-formulario h2{
+    margin: 20px;
+}
+.reseñas-formulario input{
+    margin: 10px;
+    height: 30px;
+}
+
+
+.lista-reseñas{
+    display: 'grid';
+}

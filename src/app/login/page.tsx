@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import './page.css';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,12 +33,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-semibold mb-6 text-center">Iniciar Sesión</h1>
+    <div  className='login'>
+      <form onSubmit={handleSubmit} className='formulario'>
+        <h1 >Iniciar Sesión</h1>
 
         <input
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
           name="email"
           type="email"
           placeholder="Correo"
@@ -46,7 +46,6 @@ export default function LoginPage() {
           required
         />
         <input
-          className="w-full mb-6 p-2 border border-gray-300 rounded"
           name="password"
           type="password"
           placeholder="Contraseña"
@@ -55,18 +54,16 @@ export default function LoginPage() {
           required
         />
 
-        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+        {error && <p>{error}</p>}
 
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
         >
           Entrar
         </button>
         
         <button
             onClick={() => router.push('/signup')}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
             >
             Registrarse
         </button>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import '../login/page'
 
 export default function SignupPage() {
   const router = useRouter();
@@ -32,12 +33,11 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-semibold mb-6 text-center">Crear Cuenta</h1>
+    <div >
+      <form onSubmit={handleSubmit} className='formulario' >
+        <h1 >Crear Cuenta</h1>
 
         <input
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
           name="name"
           placeholder="Nombre"
           value={form.name}
@@ -45,7 +45,6 @@ export default function SignupPage() {
           required
         />
         <input
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
           name="email"
           type="email"
           placeholder="Correo"
@@ -54,7 +53,6 @@ export default function SignupPage() {
           required
         />
         <input
-          className="w-full mb-6 p-2 border border-gray-300 rounded"
           name="password"
           type="password"
           placeholder="Contraseña"
@@ -63,7 +61,7 @@ export default function SignupPage() {
           required
         />
 
-        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+        {error && <p>{error}</p>}
 
         <button
           type="submit"

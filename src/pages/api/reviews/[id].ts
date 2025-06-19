@@ -9,9 +9,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'DELETE') {
     const { id } = req.query;
+    const reviewId = parseInt(Array.isArray(id) ? id[0] : id || '', 10);
+
+    if (isNaN(reviewId)) {
+      return res.status(400).json({ error: 'ID inválido' });
+    }
 
     const review = await prisma.review.findUnique({
-      where: { id: Number(id) },
+      where: { id: reviewId },
     });
 
     if (!review)
@@ -21,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(403).json({ error: 'No tienes permiso para eliminar esta reseña' });
 
     await prisma.review.delete({
-      where: { id: Number(id) },
+      where: { id: reviewId },
     });
 
     res.status(200).json({ message: 'Reseña eliminada correctamente' });
