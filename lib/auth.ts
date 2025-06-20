@@ -7,6 +7,8 @@ export const getUserFromRequest = (req: NextApiRequest) => {
   if (!cookies) return null;
 
   const { token } = parse(cookies);
+  if(!token) return null;
+  
   try {
     const decoded = verifyToken(token);
     return decoded;
