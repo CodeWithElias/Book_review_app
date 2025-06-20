@@ -133,7 +133,7 @@ Estos son algunos de los sentimientos que el lector podria experimetar la leer u
     JWT_SECRET=alguna_clave_secreta_segura
     ```
 
-5. Ejecuta las magraciones:
+5. Ejecuta las migraciones:
     ```bash
     npx prisma migrate deploy
     ```
@@ -198,3 +198,7 @@ Total estimado: ~10.5 horas
 Este proyecto fue construido con el objetivo de equilibrar funcionalidad backend robusta con una UI clara y accesible. La inclusión del campo mood ofrece una dimensión emocional poco común en apps de reseñas. Me enfoqué en seguridad, claridad visual y estructura limpia para demostrar capacidades fullstack.
 
 ---
+
+# Contacto
+- Autor: Elias Puma Claure
+- GitHub: https://github.com/CodeWithElias
