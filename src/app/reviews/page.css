@@ -91,8 +91,31 @@ z-index: 999;
     border-radius: 5px;
 }
 
+.marcado {
+    border-radius: 50%;
+}
 
+.no-marcado {
+    border-radius: 0%;
+}
 
+.estrellas{
+    font-size: 30px;
+}
+.estado-de-animo{
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 18px;
+    color:aqua;
+}
+.comentario span{
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.autor{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+    color: cadetblue;
+}
 
 @media (max-width: 768px) {
     .lista-reseñas{

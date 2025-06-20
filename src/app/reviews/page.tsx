@@ -1,5 +1,5 @@
 'use client'
-import { getUserFromRequest } from "../../../lib/auth";
+
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
@@ -118,16 +118,18 @@ export default function ReviewsPage(){
                 placeholder="Titulo del libro"
                 required
               />
-              <input
-                name="rating"
-                type="number"
-                min="1"
-                max="5"
-                value={form.rating}
-                onChange={handleChange}
-                placeholder="Puntuación (1-5)"
-                required
-              />
+              <div className="flex gap-1 text-xl">
+                {[1, 2, 3, 4, 5].map(num => (
+                  <button
+                    type="button"
+                    key={num}
+                    onClick={() => setForm(prev => ({ ...prev, rating: num.toString() }))}
+                    className={num <= Number(form.rating) ? 'marcado' : 'no-marcado'}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
               <textarea
                 name="review"
                 value={form.review}
@@ -158,15 +160,19 @@ export default function ReviewsPage(){
         {reviews.map((r) => (
           <div key={r.id}>
             <h2>{r.bookTitle}</h2>
-            <p>{r.user.name}</p>
-            <p className="comentario">{r.review}</p>
-            <p>
-              <strong>{r.rating}/5</strong>
+            <p className="autor">{r.user.name}</p>
+            <p className="comentario"><span>Comentario:</span><br />{r.review}</p>
+            <p className="estrellas">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span key={i}>
+                  {i < r.rating ? '⭐' : '☆'}
+                </span>
+              ))}
             </p>
-            <p>{r.mood}</p>
+            <p><span className="estado-de-animo">Me sentí: </span>{r.mood}</p>
 
             {userName === r.user.name && (
-              <button onClick={() => handleDelete(r.id)}>Eliminar (si sos el autor)</button>
+              <button onClick={() => handleDelete(r.id)}>Eliminar</button>
             )}
           </div>
         ))}
